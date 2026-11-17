@@ -1,0 +1,913 @@
+/*
+  style.css - the look of the website: the football pitch, seen through glass.
+  (The same design as the stock-market project, so both projects look like one family.)
+
+  HOW THE GLASS IS MADE
+  The method follows OpenGlass UI's "liquid" design (https://github.com/moekoelueker/open-glass-ui,
+  MIT licence, copy in static/licenses/open-glass-ui-LICENSE.txt). It is a React library and this
+  site is plain HTML, so the technique is written out here by hand:
+
+    1. One material, a few dials.  Frost, tint, saturation, brightness, edge light and depth
+       are numbers at the top of this file. Every glass surface is built from them.
+    2. A lit edge instead of a border.  A one-pixel ring with a highlight where the light
+       comes from (top, a little left) and a fainter reflection opposite it.
+    3. Dark glass dims what is behind it and light glass lifts it, so text keeps its contrast
+       over any part of the backdrop.
+    4. Controls are pills. A choice is shown by a glass "thumb" that springs to the chosen
+       item inside a recessed track. Text boxes are recessed wells.
+    5. Glass is for the navigation and the controls. The charts and tables sit on denser,
+       calmer sheets so they stay easy to read.
+    6. Colour belongs to the data. The glass and the buttons are neutral; blue and orange
+       only ever mean the home team and the away team.
+    7. Fallbacks are designed, not left to chance: no blur support, "reduce transparency",
+       "reduce motion" and Windows high-contrast mode each get a proper look (end of file).
+
+  THE BACKDROP
+  A stadium on a sunny afternoon: grass, sky and the warm stands dissolved into soft light; in
+  dark mode the same stadium at night under the floodlights. Over it lies a faint pitch with a
+  passing network on it, which the glass panels blur into soft light.
+
+  TYPE
+  Inter for the interface and all numbers. Newsreader, a newspaper serif, for the match line,
+  like the score at the top of a match report.
+*/
+
+@property --glint {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tokens                                                              */
+/* ------------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+
+  /* The dials. 1 = the default look. Change one number to re-light the whole site. */
+  --glass-blur: 1;             /* frost: 0 is clear, 2 is heavily frosted */
+  --glass-opacity: 1;          /* how dense the tint is */
+  --glass-saturation: 1;       /* how vividly the backdrop's colour comes through */
+  --glass-brightness: 1;       /* below 1 dims what is behind the glass */
+  --glass-rim: 1;              /* strength of the lit edge */
+  --glass-lensing: 1;          /* the bright inner band that reads as thickness */
+  --glass-shadow: 1;           /* depth */
+  --glass-light-angle: 340deg; /* where the light comes from: 0 = top, clockwise */
+  --glass-light-spread: 110deg;/* how much of the edge is lit */
+
+  /* Ink and neutral controls */
+  --ink: #0f172a;
+  --ink-2: #334155;
+  --muted: #566378;
+  --accent: #0f172a;           /* the "on" colour of buttons and switches: ink, not a hue */
+  --accent-ink: #ffffff;
+  --accent-glow: rgb(15 23 42 / 0.34);
+  --focus: #0f172a;
+  --solid: #ffffff;            /* an opaque surface, for native menus and fallbacks */
+  --thead: rgb(249 250 253 / 0.9);
+  --control-edge: rgb(15 23 42 / 0.48);
+  --hover-wash: rgb(15 23 42 / 0.055);
+  --row-wash: rgb(15 23 42 / 0.045);
+  --knob-on: #ffffff;
+  --error: #b42318;
+  --warn: #eda100;             /* "Data delayed": always shown with a "!" and the words */
+
+  /* Data colours (the only hues in the interface): the home team and the away team */
+  --home: #2a78d6;
+  --away: #de5b24;
+
+  /* The football backdrop: a faint pitch and passing network behind the glass (decoration, so very quiet) */
+  --bd-pitch: rgb(255 255 255 / 0.75);
+  --bd-link: rgb(15 23 42 / 0.1);
+  --bd-home: rgb(42 120 214 / 0.22);
+  --bd-away: rgb(222 91 36 / 0.2);
+
+  /* The material, built from the dials */
+  --lg-fill: rgb(255 255 255 / calc(0.52 * var(--glass-opacity)));
+  --lg-fill-hover: rgb(255 255 255 / calc(0.7 * var(--glass-opacity)));
+  --lg-thumb: rgb(255 255 255 / 0.96);
+  --lg-well: rgb(15 23 42 / 0.065);
+  --lg-well-shadow:
+    inset 0 1px 2px rgb(15 23 42 / 0.12), inset 0 0 0 0.5px rgb(15 23 42 / 0.08),
+    inset 0 -1px 0 rgb(255 255 255 / 0.6);
+  --lg-hairline: rgb(15 23 42 / 0.1);
+  --lg-edge: rgb(15 23 42 / calc(0.1 * var(--glass-rim)));
+  --lg-spec: rgb(255 255 255 / calc(1 * var(--glass-rim)));
+  --lg-spec-counter: rgb(255 255 255 / calc(0.75 * var(--glass-rim)));
+  --lg-rim: inset 0 0 calc(14px * var(--glass-lensing)) rgb(255 255 255 / calc(0.3 * var(--glass-lensing)));
+  /* inner glow on the lit side: offsets are sin/cos of the 340deg light angle, times 10px */
+  --lg-bloom: inset 3.4px 9.4px 16px -12px rgb(255 255 255 / calc(0.7 * var(--glass-rim)));
+  --lg-lift:
+    0 1px 2px rgb(15 23 42 / calc(0.07 * var(--glass-shadow))),
+    0 6px 18px -6px rgb(15 23 42 / calc(0.2 * var(--glass-shadow)));
+  --lg-lift-high:
+    0 2px 4px rgb(15 23 42 / calc(0.06 * var(--glass-shadow))),
+    0 22px 56px -14px rgb(15 23 42 / calc(0.3 * var(--glass-shadow)));
+  --lg-blur: blur(calc(12px * var(--glass-blur))) saturate(calc(1.8 * var(--glass-saturation)))
+    brightness(calc(1.1 * var(--glass-brightness)));
+  --lg-blur-surface: blur(calc(24px * var(--glass-blur))) saturate(calc(1.7 * var(--glass-saturation)))
+    brightness(calc(1.08 * var(--glass-brightness)));
+  --lg-blur-sheet: blur(calc(20px * var(--glass-blur))) saturate(calc(1.45 * var(--glass-saturation)))
+    brightness(calc(1.06 * var(--glass-brightness)));
+  /* the floating bar has content sliding underneath it, so it lifts (or in dark mode dims) more firmly */
+  --lg-blur-bar: blur(calc(20px * var(--glass-blur))) saturate(calc(1.6 * var(--glass-saturation)))
+    brightness(calc(1.1 * var(--glass-brightness)));
+  --lg-surface: color-mix(in srgb, rgb(255 255 255) min(100%, calc(52% * var(--glass-opacity))), transparent);
+  --lg-bar: color-mix(in srgb, rgb(255 255 255) min(100%, calc(64% * var(--glass-opacity))), transparent);
+  --lg-sheet: color-mix(in srgb, rgb(255 255 255) min(100%, calc(66% * var(--glass-opacity))), transparent);
+  --lg-knob: #ffffff;
+  --lg-knob-shadow:
+    0 0 0 0.5px rgb(15 23 42 / 0.1), 0 1px 3px rgb(15 23 42 / 0.16), 0 3px 10px -3px rgb(15 23 42 / 0.16);
+
+  /* The backdrop: a sunny afternoon at the stadium - grass, sky and the warm stands, dissolved into light */
+  --wall-base: #e3efe2;
+  --wall:
+    radial-gradient(46% 54% at 4% 2%, #ffe0b8 0%, transparent 70%),
+    radial-gradient(42% 52% at 98% 0%, #bcd2ff 0%, transparent 72%),
+    radial-gradient(50% 56% at 86% 100%, #a9e6c1 0%, transparent 70%),
+    radial-gradient(46% 52% at 6% 98%, #c6efb4 0%, transparent 70%),
+    radial-gradient(36% 40% at 50% 44%, #f4f7d2 0%, transparent 72%),
+    linear-gradient(135deg, #e9f1dd 0%, #e4eefb 100%);
+
+  --spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ink: #f8fafc;
+    --ink-2: #cbd5e1;
+    --muted: #a3b0c2;
+    --accent: #f1f5f9;
+    --accent-ink: #0f172a;
+    --accent-glow: rgb(241 245 249 / 0.2);
+    --focus: #f8fafc;
+    --solid: #1b1f2e;
+    --thead: rgb(24 26 38 / 0.9);
+    --control-edge: rgb(255 255 255 / 0.36);
+    --hover-wash: rgb(255 255 255 / 0.07);
+    --row-wash: rgb(255 255 255 / 0.055);
+    --knob-on: #0f172a;
+    --error: #ff9b90;
+    --warn: #f1c75b;
+    --home: #3987e5;
+    --away: #d95926;
+    --bd-pitch: rgb(255 255 255 / 0.13);
+    --bd-link: rgb(255 255 255 / 0.09);
+    --bd-home: rgb(57 135 229 / 0.3);
+    --bd-away: rgb(217 89 38 / 0.28);
+
+    --lg-fill: rgb(255 255 255 / calc(0.1 * var(--glass-opacity)));
+    --lg-fill-hover: rgb(255 255 255 / calc(0.16 * var(--glass-opacity)));
+    --lg-thumb: rgb(255 255 255 / 0.2);
+    --lg-well: rgb(0 0 0 / 0.24);
+    --lg-well-shadow:
+      inset 0 1px 2px rgb(0 0 0 / 0.3), inset 0 0 0 0.5px rgb(255 255 255 / 0.07),
+      inset 0 -1px 0 rgb(255 255 255 / 0.07);
+    --lg-hairline: rgb(255 255 255 / 0.12);
+    --lg-edge: rgb(255 255 255 / calc(0.14 * var(--glass-rim)));
+    --lg-spec: rgb(255 255 255 / calc(0.85 * var(--glass-rim)));
+    --lg-spec-counter: rgb(255 255 255 / calc(0.3 * var(--glass-rim)));
+    --lg-rim: inset 0 0 calc(14px * var(--glass-lensing)) rgb(255 255 255 / calc(0.05 * var(--glass-lensing)));
+    --lg-bloom: inset 3.4px 9.4px 16px -12px rgb(255 255 255 / calc(0.24 * var(--glass-rim)));
+    --lg-lift:
+      0 1px 2px rgb(0 0 0 / calc(0.18 * var(--glass-shadow))),
+      0 6px 18px -6px rgb(0 0 0 / calc(0.4 * var(--glass-shadow)));
+    --lg-lift-high:
+      0 2px 4px rgb(0 0 0 / calc(0.16 * var(--glass-shadow))),
+      0 22px 56px -14px rgb(0 0 0 / calc(0.58 * var(--glass-shadow)));
+    --lg-blur: blur(calc(12px * var(--glass-blur))) saturate(calc(1.8 * var(--glass-saturation)))
+      brightness(calc(0.72 * var(--glass-brightness)));
+    --lg-blur-surface: blur(calc(24px * var(--glass-blur))) saturate(calc(1.8 * var(--glass-saturation)))
+      brightness(calc(0.74 * var(--glass-brightness)));
+    --lg-blur-sheet: blur(calc(20px * var(--glass-blur))) saturate(calc(1.7 * var(--glass-saturation)))
+      brightness(calc(0.7 * var(--glass-brightness)));
+    --lg-blur-bar: blur(calc(20px * var(--glass-blur))) saturate(calc(1.7 * var(--glass-saturation)))
+      brightness(calc(0.5 * var(--glass-brightness)));
+    --lg-surface: color-mix(in srgb, rgb(16 18 26) min(100%, calc(36% * var(--glass-opacity))), transparent);
+    --lg-bar: color-mix(in srgb, rgb(16 18 26) min(100%, calc(58% * var(--glass-opacity))), transparent);
+    --lg-sheet: color-mix(in srgb, rgb(16 18 26) min(100%, calc(52% * var(--glass-opacity))), transparent);
+    --lg-knob: #e8edf5;
+    --lg-knob-shadow:
+      0 0 0 0.5px rgb(0 0 0 / 0.12), 0 1px 3px rgb(0 0 0 / 0.28), 0 3px 10px -3px rgb(0 0 0 / 0.26);
+
+    /* the same stadium at night, under the floodlights */
+    --wall-base: #07130f;
+    --wall:
+      radial-gradient(46% 58% at 98% 0%, #3f4fd6 0%, transparent 70%),
+      radial-gradient(52% 60% at 88% 100%, #0b8a5c 0%, transparent 70%),
+      radial-gradient(50% 56% at 0% 100%, #136b4a 0%, transparent 70%),
+      radial-gradient(42% 46% at 2% 0%, #6b5a2a 0%, transparent 72%),
+      radial-gradient(40% 46% at 48% 46%, #23356e 0%, transparent 72%),
+      linear-gradient(135deg, #0b1424 0%, #051a12 100%);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+[hidden] { display: none !important; }
+* { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--wall-base);
+  scroll-padding-top: 92px;       /* keyboard focus is never hidden under the floating bar */
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  font: 400 16px/1.55 var(--sans);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+/* The backdrop stays still while the page scrolls over it, so each glass panel
+   picks up different light as it moves. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--wall);
+}
+/* On top of it, a faint pitch with a passing network on it (drawn by app.js). It fades out towards
+   the top of the window, so the title and anything else written straight on the backdrop stay clean;
+   the glass panels blur it into soft light. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, transparent 18%, #000 46%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, transparent 18%, #000 46%, #000 100%);
+}
+.backdrop svg { display: block; width: 100%; height: 100%; }
+.backdrop path, .backdrop circle { vector-effect: non-scaling-stroke; }
+.bd-pitch { fill: none; stroke: var(--bd-pitch); stroke-width: 2.5; }
+.bd-link { fill: none; stroke: var(--bd-link); stroke-width: 2; stroke-linecap: round; }
+.bd-home { fill: var(--bd-home); }
+.bd-away { fill: var(--bd-away); }
+.page { max-width: 1240px; margin: 0 auto; padding: 0 28px 44px; }
+
+h1, h2, h3 { color: var(--ink); text-wrap: balance; }
+h2 { font: 650 18.5px/1.3 var(--sans); letter-spacing: -0.016em; margin: 0 0 10px; }
+h3 { font: 650 15.5px/1.35 var(--sans); letter-spacing: -0.01em; margin: 24px 0 10px; }
+h3:first-child { margin-top: 0; }
+p { margin: 0 0 12px; }
+strong { font-weight: 650; }
+a { color: inherit; text-decoration-color: var(--control-edge); text-underline-offset: 2px; }
+a:hover { text-decoration-color: currentColor; }
+code {
+  font: 13px/1.4 var(--mono); color: var(--ink);
+  background: var(--lg-well); padding: 2px 6px; border-radius: 6px;
+}
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.skip {
+  position: fixed; top: 10px; left: 10px; z-index: 100;
+  padding: 10px 16px; border-radius: 999px;
+  background: var(--accent); color: var(--accent-ink); font-weight: 600; text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip:focus { transform: none; }
+
+/* ------------------------------------------------------------------ */
+/* The glass surface                                                   */
+/* ------------------------------------------------------------------ */
+.glass, .card, .tile, .notice {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(calc(var(--glass-light-angle) + 180deg),
+      rgb(255 255 255 / calc(0.07 * var(--glass-rim))), transparent 42%),
+    var(--lg-surface);
+  box-shadow: var(--lg-rim), var(--lg-bloom), var(--lg-lift);
+  -webkit-backdrop-filter: var(--lg-blur-surface);
+  backdrop-filter: var(--lg-blur-surface);
+}
+
+/* The lit edge: a one-pixel ring cut out with a mask. The highlight is a sweep
+   aimed at the light, with a fainter reflection on the opposite side. */
+.glass::after, .card::after, .tile::after, .notice::after, .thumb::after, button.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    conic-gradient(
+      from calc(var(--glass-light-angle) - var(--glass-light-spread) / 2),
+      transparent 0deg,
+      var(--lg-spec) calc(var(--glass-light-spread) / 2),
+      transparent var(--glass-light-spread),
+      transparent 180deg,
+      var(--lg-spec-counter) calc(180deg + var(--glass-light-spread) / 2),
+      transparent calc(180deg + var(--glass-light-spread))
+    ),
+    linear-gradient(var(--lg-edge), var(--lg-edge));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+/* ------------------------------------------------------------------ */
+/* Masthead                                                            */
+/* ------------------------------------------------------------------ */
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+  gap: 28px 56px;
+  align-items: end;
+  padding: 56px 0 26px;
+}
+.masthead h1 {
+  font-weight: 780;
+  font-size: clamp(2.3rem, 1.05rem + 3.7vw, 4.3rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0 0 20px;
+}
+.lede { font-size: 18px; line-height: 1.5; color: var(--ink-2); max-width: 58ch; margin: 0 0 20px; }
+
+/* the data's date line, as a small glass badge */
+.status {
+  display: inline-flex; align-items: center; margin: 0;
+  padding: 6px 14px; border-radius: 999px;
+  font-size: 13.5px; line-height: 1.45; color: var(--ink-2);
+  background: var(--lg-fill);
+  box-shadow: inset 0 0 0 1px var(--lg-hairline), var(--lg-lift);
+  -webkit-backdrop-filter: var(--lg-blur);
+  backdrop-filter: var(--lg-blur);
+}
+
+/* the settings: a glass panel floating beside the title */
+.filters {
+  display: grid; gap: 16px;
+  padding: 20px; border-radius: 26px;
+}
+.filters .segmented { display: grid; border-radius: 17px; }
+.filters .segmented button { align-items: flex-start; border-radius: 14px; padding: 0 13px; min-height: 36px; }
+.filters .segmented .thumb { border-radius: 14px; }
+.switch-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  min-height: 32px; cursor: pointer; font-weight: 500;
+}
+
+/* ------------------------------------------------------------------ */
+/* The section bar: nine tabs in one floating glass capsule            */
+/* ------------------------------------------------------------------ */
+.tabbar {
+  position: sticky; top: 12px; z-index: 30;
+  width: fit-content; max-width: 100%;
+  margin: 4px 0 26px; padding: 5px;
+  border-radius: 999px;
+  background: var(--lg-bar);
+  box-shadow: var(--lg-rim), var(--lg-bloom), var(--lg-lift-high);
+  -webkit-backdrop-filter: var(--lg-blur-bar);
+  backdrop-filter: var(--lg-blur-bar);
+}
+.tabs {
+  position: relative; isolation: isolate;
+  display: flex; gap: 2px;
+  overflow-x: auto; scrollbar-width: none;
+  border-radius: 999px;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tabs button, .segmented button {
+  position: relative;
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  flex: none;
+  font: 500 14.5px/1.2 var(--sans); letter-spacing: -0.005em; color: var(--ink-2);
+  background: transparent; border: 0; border-radius: 999px;
+  padding: 0 13px; min-height: 40px;
+  cursor: pointer; white-space: nowrap;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+/* an invisible bold copy of the label keeps the width the same when a label turns bold */
+.tabs button::after, .segmented button::after {
+  content: attr(data-label);
+  height: 0; overflow: hidden; visibility: hidden;
+  font-weight: 650; pointer-events: none; user-select: none;
+}
+.tabs button:hover, .segmented button:hover { color: var(--ink); }
+.tabs button[aria-selected="true"], .segmented button[aria-pressed="true"] { color: var(--ink); font-weight: 650; }
+.tabs button:focus-visible, .segmented button:focus-visible { outline-offset: -3px; }
+
+/* Until the script has measured where the thumb goes, the chosen item wears it itself */
+.tabs button[aria-selected="true"], .segmented button[aria-pressed="true"] {
+  background: var(--lg-thumb);
+  box-shadow: var(--lg-lift);
+}
+.tabs[data-thumb="ready"] button[aria-selected="true"],
+.segmented[data-thumb="ready"] button[aria-pressed="true"] {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* The thumb: one piece of glass that springs to the chosen item */
+.thumb {
+  position: absolute; z-index: -1; top: 0; left: 0;
+  width: var(--thumb-w, 0); height: var(--thumb-h, 0);
+  border-radius: 999px;
+  background: var(--lg-thumb);
+  box-shadow: var(--lg-rim), var(--lg-bloom), var(--lg-lift);
+  opacity: 0; pointer-events: none;
+  transform: translate(var(--thumb-x, 0), var(--thumb-y, 0));
+}
+[data-thumb="ready"] > .thumb { opacity: 1; }
+[data-thumb-moves] > .thumb {
+  transition:
+    transform 520ms var(--spring), width 520ms var(--spring),
+    height 520ms var(--spring), opacity 200ms ease;
+}
+
+/* a small floating toolbar: a label and a choice that belongs to the charts below it */
+.toolbar {
+  display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+  margin: 0 0 16px; padding: 6px 6px 6px 20px; border-radius: 26px;
+  font-size: 14.5px; font-weight: 500; color: var(--ink-2);
+}
+
+/* a recessed track for small choices inside a panel */
+.segmented {
+  position: relative; isolation: isolate;
+  display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 3px;
+  border-radius: 999px;
+  background: var(--lg-well);
+  box-shadow: var(--lg-well-shadow);
+}
+.segmented button { min-height: 36px; font-size: 14px; }
+
+/* ------------------------------------------------------------------ */
+/* Sheets: the calm, dense glass that carries charts, tables and text  */
+/* ------------------------------------------------------------------ */
+#main:focus { outline: none; }
+.card, .notice {
+  border-radius: 24px;
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  min-width: 0;
+  background:
+    linear-gradient(calc(var(--glass-light-angle) + 180deg),
+      rgb(255 255 255 / calc(0.06 * var(--glass-rim))), transparent 42%),
+    var(--lg-sheet);
+  -webkit-backdrop-filter: var(--lg-blur-sheet);
+  backdrop-filter: var(--lg-blur-sheet);
+}
+.card > p, .measure { max-width: 80ch; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; }
+.caption { font-size: 14px; line-height: 1.5; color: var(--ink-2); margin: 12px 0 0; max-width: 100ch; }
+.caption.tight { margin: 0 0 12px; }
+.caption.after-grid {
+  margin: -6px 0 20px; padding: 10px 16px; border-radius: 16px; max-width: none;
+  background: var(--lg-sheet);
+  box-shadow: inset 0 0 0 1px var(--lg-hairline);
+  -webkit-backdrop-filter: var(--lg-blur-sheet);
+  backdrop-filter: var(--lg-blur-sheet);
+}
+.spaced { margin-top: 18px; }
+.error { color: var(--error); font-weight: 600; }
+.notice { max-width: 760px; padding: 28px; }
+.notice p { font-size: 17px; }
+
+/* while new data loads the glass stays put and only what is written on it fades */
+:is(.card, .tile, .notice) > * { transition: opacity 160ms ease; }
+#main.stale :is(.card, .tile, .notice) > * { opacity: 0.45; }
+
+/* Key numbers: each one on its own small pane of glass */
+.tiles {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px; margin-bottom: 20px;
+}
+.tile { border-radius: 22px; padding: 18px 20px 20px; }
+.tile .label { font-size: 13.5px; line-height: 1.35; color: var(--ink-2); font-weight: 500; }
+.tile .value { font-size: 36px; font-weight: 650; line-height: 1.1; letter-spacing: -0.035em; margin-top: 8px; }
+.tile .help { font-size: 13px; line-height: 1.4; color: var(--muted); margin-top: 8px; }
+/* inside a sheet the numbers share one inset strip: glass is not stacked on glass */
+.card .tiles {
+  gap: 0; margin: 4px 0 22px; border-radius: 16px; overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--lg-hairline);
+}
+.card .tile {
+  border-radius: 0; background: none; isolation: auto;
+  box-shadow: 1px 0 0 var(--lg-hairline), 0 1px 0 var(--lg-hairline);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.card .tile::after { content: none; }
+
+/* headings that sit between sheets, straight on the backdrop */
+.section-title { font-size: 21px; letter-spacing: -0.02em; margin: 30px 0 14px; }
+.story h2 { font-size: 20px; margin-bottom: 14px; }
+.prose { font-size: 17px; line-height: 1.6; max-width: 80ch; margin: 0; }
+/* a reading note: marked by a short ink bar inside the sheet */
+.note { padding-left: 40px; }
+.note p { margin: 0; max-width: 84ch; }
+.note::before {
+  content: ""; position: absolute; left: 22px; top: 24px; bottom: 24px;
+  width: 3px; border-radius: 3px; background: var(--accent);
+}
+
+.findings { list-style: none; margin: 0; padding: 0; font-size: 17px; line-height: 1.55; max-width: 80ch; }
+.findings li { position: relative; padding-left: 22px; margin-bottom: 10px; }
+.findings li:last-child { margin-bottom: 0; }
+.findings li::before {
+  content: ""; position: absolute; left: 2px; top: 0.6em; width: 7px; height: 7px;
+  border-radius: 50%; background: var(--ink);
+}
+.techniques { margin: 0; padding-left: 26px; max-width: 95ch; }
+.techniques li { margin-bottom: 8px; padding-left: 4px; }
+.techniques li::marker { font-weight: 600; color: var(--ink-2); }
+
+/* ------------------------------------------------------------------ */
+/* Controls                                                            */
+/* ------------------------------------------------------------------ */
+.field { display: flex; flex-direction: column; gap: 7px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.field > span, .field > legend { font-size: 13.5px; font-weight: 550; color: var(--ink-2); padding: 0; }
+.field > legend { margin-bottom: 9px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 0 0 16px; color: var(--ink-2); }
+.row > .field { flex: 0 1 auto; }
+.row > .field:last-child { flex: 1 1 280px; }
+.check { display: inline-flex; align-items: center; gap: 12px; min-height: 32px; cursor: pointer; }
+
+/* Text boxes and menus are recessed wells, so the eye reads "type here" against raised glass */
+select, input[type="text"], input[type="search"] {
+  font: inherit; color: var(--ink);
+  width: 100%; max-width: 100%; min-height: 44px; padding: 8px 14px;
+  border: 0; border-radius: 14px;
+  background-color: var(--lg-well);
+  box-shadow: var(--lg-well-shadow), inset 0 0 0 1px var(--control-edge);
+  transition: box-shadow 200ms var(--ease), background-color 200ms ease;
+}
+input[type="search"] { border-radius: 999px; padding-inline: 18px; }
+select {
+  appearance: none; cursor: pointer; padding-right: 40px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ink-2) 50%),
+    linear-gradient(135deg, var(--ink-2) 50%, transparent 50%);
+  background-position: calc(100% - 21px) 52%, calc(100% - 16px) 52%;
+  background-size: 5px 5px; background-repeat: no-repeat;
+}
+option { background: var(--solid); color: var(--ink); }
+select:hover, input[type="text"]:hover, input[type="search"]:hover { background-color: var(--hover-wash); }
+/* focus is drawn as a ring of light around the well; the see-through outline only
+   becomes visible in Windows high-contrast mode, where shadows are not drawn */
+select:focus-visible, input[type="text"]:focus-visible, input[type="search"]:focus-visible {
+  background-color: var(--lg-fill);
+  box-shadow: 0 0 0 1.5px var(--focus), 0 0 0 5px color-mix(in srgb, var(--focus), transparent 82%);
+  outline: 2px solid transparent; outline-offset: 2px;
+}
+::placeholder { color: var(--muted); opacity: 1; }
+
+/* The main button: ink-coloured glass. It stays lit like glass, and a glint
+   follows the pointer along its top edge. */
+button.primary {
+  position: relative; isolation: isolate;
+  font: 600 15px/1.2 var(--sans); letter-spacing: -0.01em; color: var(--accent-ink);
+  min-height: 46px; padding: 0 22px;
+  border: 0; border-radius: 999px; cursor: pointer;
+  background:
+    radial-gradient(ellipse 60% 0.45rem at var(--light-x, 50%) 0%,
+      rgb(255 255 255 / calc(min(var(--glint), 1) * 0.32)), transparent) no-repeat,
+    linear-gradient(180deg, color-mix(in srgb, var(--accent), white 16%), var(--accent));
+  box-shadow:
+    inset 3.4px 9.4px 14px -10px rgb(255 255 255 / 0.5),
+    0 1px 2px rgb(0 0 0 / 0.16),
+    0 10px 26px -8px var(--accent-glow);
+  transition:
+    box-shadow 260ms var(--ease), transform 420ms var(--spring), --glint 320ms var(--ease);
+}
+button.primary:hover:not(:disabled) {
+  --glint: 1;
+  box-shadow:
+    inset 3.4px 9.4px 14px -10px rgb(255 255 255 / 0.5),
+    0 2px 4px rgb(0 0 0 / 0.18),
+    0 16px 32px -8px var(--accent-glow);
+}
+button.primary:active:not(:disabled) { --glint: 1.4; transform: scale(0.965); }
+button.primary:disabled { opacity: 0.45; cursor: default; }
+
+/* A switch: the knob is a pill that swells into a small lens while it is held */
+input.switch {
+  appearance: none; position: relative; flex: none;
+  width: 50px; height: 28px; margin: 0; border-radius: 999px; cursor: pointer;
+  background: var(--lg-well);
+  box-shadow: inset 0 0 0 1px var(--control-edge), inset 0 0 3px rgb(0 0 0 / 0.12);
+  transition: background-color 260ms var(--ease), box-shadow 260ms var(--ease);
+}
+input.switch::before {
+  content: ""; position: absolute; top: 3px; left: 3px;
+  width: 30px; height: 22px; border-radius: 999px;
+  background: var(--lg-knob);
+  box-shadow: var(--lg-knob-shadow);
+  transition:
+    transform 460ms var(--spring), background-color 200ms ease,
+    box-shadow 200ms ease, scale 320ms var(--spring);
+}
+input.switch:checked { background: var(--accent); box-shadow: inset 0 0 3px rgb(0 0 0 / 0.12); }
+input.switch:checked::before { transform: translateX(14px); background: var(--knob-on); }
+input.switch:active::before {
+  background: rgb(255 255 255 / 0.42);
+  box-shadow:
+    inset 1px 1px 0 -0.25px rgb(255 255 255 / 0.9), inset -1px -1px 0 -0.25px rgb(255 255 255 / 0.4),
+    0 0 0 0.5px rgb(0 0 0 / 0.08), 0 4px 14px rgb(0 0 0 / 0.22);
+  -webkit-backdrop-filter: blur(1px) saturate(2.2) brightness(1.12);
+  backdrop-filter: blur(1px) saturate(2.2) brightness(1.12);
+  scale: 1.22 1.3;
+}
+
+/* The slider: an ink fill in a recessed channel, with a pill knob that becomes a lens */
+input.slider {
+  --track: 6px; --knob-w: 28px; --knob-h: 18px;
+  appearance: none; -webkit-appearance: none;
+  width: 100%; height: 28px; margin: 2px 0 0; background: transparent; cursor: pointer;
+}
+input.slider::-webkit-slider-runnable-track {
+  height: var(--track); border-radius: 999px;
+  background: linear-gradient(90deg,
+    var(--accent) 0 calc(var(--knob-w) / 2 + (100% - var(--knob-w)) * var(--p, 0)),
+    var(--lg-well) 0);
+  box-shadow: var(--lg-well-shadow);
+}
+input.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: var(--knob-w); height: var(--knob-h);
+  margin-top: calc((var(--track) - var(--knob-h)) / 2);
+  border: 0; border-radius: 999px;
+  background: var(--lg-knob);
+  box-shadow: var(--lg-knob-shadow);
+  transition: transform 360ms var(--spring), background-color 200ms ease;
+}
+input.slider:active::-webkit-slider-thumb {
+  background: rgb(255 255 255 / 0.45);
+  box-shadow:
+    inset 1px 1px 0 -0.25px rgb(255 255 255 / 0.95), inset -1px -1px 0 -0.25px rgb(255 255 255 / 0.45),
+    0 0 0 0.5px rgb(0 0 0 / 0.1), 0 6px 16px rgb(0 0 0 / 0.24);
+  transform: scale(1.3, 1.45);
+}
+input.slider::-moz-range-track {
+  height: var(--track); border-radius: 999px;
+  background: var(--lg-well); box-shadow: var(--lg-well-shadow);
+}
+input.slider::-moz-range-progress { height: var(--track); border-radius: 999px; background: var(--accent); }
+input.slider::-moz-range-thumb {
+  width: var(--knob-w); height: var(--knob-h); border: 0; border-radius: 999px;
+  background: var(--lg-knob); box-shadow: var(--lg-knob-shadow);
+  transition: transform 360ms var(--spring);
+}
+input.slider:active::-moz-range-thumb { background: rgb(255 255 255 / 0.45); transform: scale(1.3, 1.45); }
+
+
+/* "Show ..." disclosures: a quiet pill that only looks like glass when you point at it */
+details { margin-top: 12px; }
+details > summary {
+  list-style: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 9px;
+  min-height: 34px; padding: 0 14px 0 12px; border-radius: 999px;
+  font-size: 13.5px; font-weight: 550; color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px var(--lg-hairline);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before {
+  content: ""; border-left: 6px solid currentColor;
+  border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+  transition: transform 420ms var(--spring);
+}
+details[open] > summary::before { transform: rotate(90deg); }
+details > summary:hover { color: var(--ink); background: var(--hover-wash); }
+details[open] > summary { margin-bottom: 10px; }
+.table-view .table-scroll { max-height: 300px; }
+
+/* ------------------------------------------------------------------ */
+/* Tables                                                              */
+/* ------------------------------------------------------------------ */
+.table-scroll {
+  overflow: auto; max-height: 460px;
+  border: 1px solid var(--lg-hairline); border-radius: 16px;
+}
+table.data { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 14.5px; }
+table.data th, table.data td {
+  padding: 10px 14px; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--lg-hairline);
+}
+/* the header row is frosted: rows blur as they scroll underneath it */
+table.data thead th {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--thead); color: var(--ink-2);
+  font-size: 13px; font-weight: 600; white-space: nowrap;
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+table.data tbody tr:last-child > td { border-bottom: 0; }
+table.data tbody tr:hover > td { background: var(--row-wash); }
+table.data .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.data .nowrap { white-space: nowrap; }
+table.data td.wrap { overflow-wrap: anywhere; min-width: 240px; }
+/* the row of the chosen company, and the "all companies" total */
+table.data tr.is-selected > td { background: var(--hover-wash); }
+table.data tr.is-selected > td:first-child { box-shadow: inset 3px 0 0 var(--accent); font-weight: 650; }
+table.data tbody tr:has(+ tr.is-total) > td { border-bottom-color: var(--control-edge); }
+table.data tr.is-total > td { font-weight: 650; }
+
+/* ------------------------------------------------------------------ */
+/* Charts, colophon                                          */
+/* ------------------------------------------------------------------ */
+.chart { width: 100%; min-height: 60px; margin-top: 6px; }
+
+.colophon {
+  margin-top: 34px; padding: 14px 20px; border-radius: 20px;
+  font-size: 13.5px; color: var(--ink-2);
+  background: var(--lg-sheet);
+}
+.colophon p { margin: 0; max-width: 110ch; }
+
+/* ------------------------------------------------------------------ */
+/* Smaller screens                                                     */
+/* ------------------------------------------------------------------ */
+@media (max-width: 1100px) {
+  .network-grid, .leaders-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 900px) {
+  .masthead { grid-template-columns: minmax(0, 1fr); gap: 22px; padding-top: 34px; align-items: start; }
+  .lede { font-size: 17px; }
+}
+@media (max-width: 820px) {
+  .page { padding: 0 14px 36px; }
+  .two { grid-template-columns: minmax(0, 1fr); }
+  .toolbar { padding: 10px 12px; border-radius: 22px; }
+  .card, .notice { padding: 20px 18px; border-radius: 22px; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tile .value { font-size: 30px; }
+  .tabbar { width: auto; top: 8px; }
+}
+@media (pointer: coarse) {
+  .tabs button, .segmented button, details > summary { min-height: 44px; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Designed fallback states                                            */
+/* ------------------------------------------------------------------ */
+
+/* 1. A browser that cannot blur what is behind an element: denser, near-solid panels */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root {
+    --lg-fill: rgb(255 255 255 / 0.9);
+    --lg-surface: rgb(250 250 252 / 0.94);
+    --lg-bar: rgb(250 250 252 / 0.96);
+    --lg-sheet: rgb(251 251 253 / 0.96);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --lg-fill: rgb(52 56 66 / 0.92);
+      --lg-surface: rgb(34 37 48 / 0.94);
+      --lg-bar: rgb(30 33 43 / 0.96);
+      --lg-sheet: rgb(26 28 38 / 0.96);
+    }
+  }
+}
+
+/* 2. "Reduce transparency" is switched on: solid panels with the same hierarchy */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --lg-fill: #f4f5f7;
+    --lg-fill-hover: #ffffff;
+    --lg-thumb: #ffffff;
+    --lg-well: #e6e9ee;
+    --lg-surface: #f6f7f9;
+    --lg-bar: #f8f9fb;
+    --lg-sheet: #fbfbfd;
+    --thead: #f1f3f7;
+    --lg-blur: none;
+    --lg-blur-surface: none;
+    --lg-blur-sheet: none;
+    --lg-blur-bar: none;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --lg-fill: #30343d;
+      --lg-fill-hover: #3a3f49;
+      --lg-thumb: #4a505b;
+      --lg-well: #161920;
+      --lg-surface: #262a33;
+      --lg-bar: #22262f;
+      --lg-sheet: #1e222b;
+      --thead: #262a33;
+    }
+  }
+  .glass, .card, .tile, .notice { background-image: none; }
+  table.data thead th, input.switch:active::before { -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* 3. "Reduce motion" is switched on: nothing springs, slides or follows the pointer */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
+  input.switch:active::before { scale: none; }
+  button.primary:active:not(:disabled) { transform: none; }
+}
+
+/* 4. Windows high-contrast mode: the system colours draw everything */
+@media (forced-colors: active) {
+  body::before, .backdrop { display: none; }
+  .glass::after, .card::after, .tile::after, .notice::after, .thumb::after, button.primary::after { content: none; }
+  .glass, .card, .tile, .notice, .status, .segmented, .table-scroll,
+  select, input[type="text"], input[type="search"], input.switch, details > summary {
+    border: 1px solid CanvasText;
+    background-image: none;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .card .tile { border: 0; }
+  select { appearance: auto; padding-right: 14px; }      /* the system draws its own arrow, in its own colours */
+  button.primary { border: 1px solid ButtonText; box-shadow: none; }
+  .thumb,
+  .tabs button[aria-selected="true"], .segmented button[aria-pressed="true"],
+  input.switch:checked {
+    color: HighlightText;
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+  input.switch::before { background: ButtonText; forced-color-adjust: none; }
+  /* the team colours are data, so they are kept */
+  .sw, .cellbar i { forced-color-adjust: none; }
+}
+
+/* 5. Printing: no decoration behind the pages */
+@media print {
+  body::before, .backdrop { display: none !important; }
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Football pages                                                      */
+/* ------------------------------------------------------------------ */
+.panel.stale :is(.card, .tile, .notice) > * { opacity: 0.45; }
+.filters .segmented.teams button { white-space: normal; text-align: left; }
+.filters .segmented.teams span { display: inline-flex; align-items: center; }
+
+/* team colour dots, used in the team choice, legends and headings */
+.sw { display: inline-block; flex: none; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: 0.02em; }
+.sw.home { background: var(--home); }
+.sw.away { background: var(--away); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 14px; color: var(--ink-2); margin: 0 0 14px; font-weight: 500; }
+
+/* the pitch beside the findings */
+.network-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(320px, 1fr); gap: 0 20px; align-items: start; }
+.side { min-width: 0; }
+.card-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; margin-bottom: 4px; }
+.card-head h2 { margin: 0; }
+.card-head .caption { margin: 0; }
+.match-line { font: 500 18px/1.3 var(--serif); color: var(--ink); }
+.pitch-card .chart { margin-top: 2px; }
+
+/* a slider with its label on one line, inside a sheet */
+.inline-slider { display: grid; grid-template-columns: auto minmax(160px, 320px); align-items: center; gap: 8px 18px;
+  margin-top: 6px; font-size: 14px; color: var(--ink-2); font-weight: 500; }
+
+/* the toolbars above the leaders, the evaluation and the PageRank demo */
+.leader-controls, .damping-bar { display: flex; width: 100%; padding: 12px 18px 12px 22px; gap: 14px 30px; align-items: center; }
+.control-group { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.control-group > span { font-size: 13.5px; font-weight: 550; color: var(--ink-2); }
+.control-group.slider-group { flex: 1 1 240px; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 4px; }
+.control-group.slider-group.wide { flex: 1 1 420px; max-width: 640px; }
+select.compact { width: auto; min-width: 150px; min-height: 40px; }
+.toolbar .segmented button { min-height: 34px; }
+.leaders-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 0 20px; align-items: start; }
+
+/* a quiet text button */
+button.ghost {
+  font: 550 14px/1.2 var(--sans); color: var(--ink-2);
+  min-height: 38px; padding: 0 16px; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--lg-fill); box-shadow: inset 0 0 0 1px var(--lg-hairline);
+  transition: background-color 200ms ease, color 200ms ease;
+}
+button.ghost:hover { color: var(--ink); background: var(--lg-fill-hover); }
+
+/* a small bar inside a table cell, in the team's colour */
+.cellbar { display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.cellbar i { display: inline-block; height: 8px; border-radius: 4px; background: var(--home); flex: none; }
+.cellbar.away i { background: var(--away); }
+.table-scroll.tall { max-height: 620px; }
+table.data td.date { white-space: nowrap; }
+.pitch-note { margin: 0 0 4px; font-size: 13.5px; color: var(--ink-2); }
+
+/* the PageRank formula */
+.formula {
+  margin: 16px 0 0; padding: 14px 16px; border-radius: 14px;
+  background: var(--lg-well); box-shadow: var(--lg-well-shadow);
+  font: 13.5px/1.6 var(--mono); color: var(--ink); white-space: pre-wrap; overflow-wrap: anywhere;
+}
+@media (max-width: 820px) {
+  .inline-slider { grid-template-columns: minmax(0, 1fr); }
+  .leader-controls, .damping-bar { flex-direction: column; align-items: stretch; }
+}
+@media (forced-colors: active) {
+  button.ghost { border: 1px solid ButtonText; box-shadow: none; }
+}

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#e3efe2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#07130f" media="(prefers-color-scheme: dark)">
+  <title>Who Runs the Team? PageRank on Football Passing Networks</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+  <link rel="preload" href="{{ url_for('static', filename='fonts/inter-normal-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fonts.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<!-- the football backdrop: a faint pitch and a passing network behind the glass (drawn by app.js; decoration only) -->
+<div class="backdrop" id="backdrop" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to the content</a>
+<div class="page">
+
+  <!-- The title sits on the coloured backdrop; the settings float beside it in a glass panel -->
+  <header class="masthead">
+    <div class="nameplate">
+      <h1>Who Runs the Team?</h1>
+      <p class="lede">Player Influence Ranking in Football using PageRank on Passing Networks.
+        Every completed pass is a link from one player to another, like a link between two web pages.
+        PageRank, the method Google first used to rank web pages, finds the players the team's passing runs through.</p>
+      <p class="status" id="status" role="status">Loading ...</p>
+    </div>
+
+    <section class="filters glass" aria-label="Settings">
+      <label class="field">
+        <span>Tournament</span>
+        <select id="tournament">
+          {% for t in tournaments %}<option>{{ t }}</option>{% endfor %}
+        </select>
+      </label>
+      <label class="field">
+        <span>Match</span>
+        <select id="match"><option>Loading ...</option></select>
+      </label>
+      <div class="field">
+        <span>Team</span>
+        <div class="segmented teams" role="group" aria-label="Team" id="team-choice"></div>
+      </div>
+      <div class="field">
+        <span title="Analysts usually draw a passing network for the starting XI until the first substitution, because everyone on it was on the pitch at the same time.">Passes used</span>
+        <div class="segmented" role="group" aria-label="Passes used">
+          <button type="button" data-key="window" data-value="first_sub" data-label="Starting XI until 1st sub" aria-pressed="true">Starting XI until 1st sub</button>
+          <button type="button" data-key="window" data-value="full" data-label="Whole match" aria-pressed="false">Whole match</button>
+        </div>
+      </div>
+      <label class="switch-row" title="Corners, free kicks, throw-ins, goal kicks and kick-offs. Turn this off to keep only passes from open play.">
+        <span>Include set pieces</span>
+        <input type="checkbox" role="switch" class="switch" id="setpieces" checked>
+      </label>
+    </section>
+  </header>
+
+  <!-- The sections: one floating glass bar; a glass thumb slides to the open section -->
+  <nav class="tabbar glass" aria-label="Sections">
+    <div class="tabs" role="tablist" id="tabs"></div>
+  </nav>
+
+  <main id="main" tabindex="-1">
+    <section class="panel" id="tab-network" role="tabpanel" hidden></section>
+    <section class="panel" id="tab-versus" role="tabpanel" hidden></section>
+
+    <!-- ================= Tournament leaders ================= -->
+    <section class="panel" id="tab-leaders" role="tabpanel" hidden>
+      <div class="toolbar glass leader-controls">
+        <label class="control-group slider-group">
+          <span>Count a match only if he was in the network for at least <strong id="ld-minutes-val">60</strong> min</span>
+          <input type="range" class="slider" id="ld-minutes" min="0" max="90" step="15" value="60">
+        </label>
+        <label class="control-group slider-group">
+          <span>Minimum matches: <strong id="ld-matches-val">3</strong></span>
+          <input type="range" class="slider" id="ld-matches" min="1" max="10" step="1" value="3">
+        </label>
+        <label class="control-group">
+          <span>Position</span>
+          <select id="ld-position" class="compact">
+            {% for p in positions %}<option>{{ p }}</option>{% endfor %}
+          </select>
+        </label>
+        <div class="control-group"><span>Sort by</span>
+          <div class="segmented" role="group" aria-label="Sort by">
+            <button type="button" data-key="sort" data-value="avg" data-label="Average PageRank" aria-pressed="true">Average PageRank</button>
+            <button type="button" data-key="sort" data-value="top" data-label="Times team's No. 1" aria-pressed="false">Times team's No. 1</button>
+          </div>
+        </div>
+      </div>
+      <div id="leaders-out"></div>
+    </section>
+
+    <!-- ================= Player of the Match check ================= -->
+    <section class="panel" id="tab-evaluation" role="tabpanel" hidden>
+      <aside class="card note"><p><strong>How the check works.</strong> There is no "correct answer" for who is the most
+        influential player, so PageRank is compared with the closest thing we have: the official
+        <strong>Player of the Match</strong> of all 115 World Cup 2022 and Euro 2024 matches. For every match the award
+        winner's team is ranked by each method, and we count how often the winner comes out on top. The whole-match
+        network is used here, because many winners were substitutes or were substituted.</p></aside>
+      <div class="toolbar glass"><span>Show results for</span>
+        <div class="segmented" role="group" aria-label="Show results for">
+          {% for g in eval_groups %}<button type="button" data-key="evalGroup" data-value="{{ g }}" data-label="{{ g }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ g }}</button>{% endfor %}
+        </div>
+      </div>
+      <div id="eval-out"></div>
+    </section>
+
+    <!-- ================= How PageRank works ================= -->
+    <section class="panel" id="tab-how" role="tabpanel" hidden>
+      <div class="toolbar glass damping-bar">
+        <label class="control-group slider-group wide">
+          <span>Damping factor <strong>d = <span id="damping-val">0.85</span></strong> (Google used 0.85)</span>
+          <input type="range" class="slider" id="damping" min="0.05" max="0.95" step="0.05" value="0.85">
+        </label>
+        <button type="button" class="ghost" id="damping-reset">Back to 0.85</button>
+      </div>
+      <div id="how-out"></div>
+    </section>
+
+    <!-- ================= About the data ================= -->
+    <section class="panel" id="tab-about" role="tabpanel" hidden>
+      <div class="two">
+        <div class="card"><h2>What is in the data</h2><div id="about-table"></div>
+          <p class="caption" id="about-built"></p></div>
+        <div class="card"><h2>Where it comes from</h2>
+          <p class="measure"><strong>StatsBomb Open Data</strong>: free JSON files on GitHub
+            (<a href="https://github.com/statsbomb/open-data" target="_blank" rel="noopener noreferrer">github.com/statsbomb/open-data</a>).
+            StatsBomb records every action of a match: who passed, who received the ball, where on the pitch and at what minute.
+            StatsBomb ask anyone who publishes or shares work based on this data to name StatsBomb as the source and use their logo.</p>
+          <p class="measure"><strong>Player of the Match</strong>: World Cup 2022 from
+            <a href="https://www.goal.com/en/lists/listed-ronaldo-richarlison-world-cup-man-of-match-awards-how-decided/blt0eb0cf6f34e46016" target="_blank" rel="noopener noreferrer">Goal.com</a>
+            (a fan vote on FIFA+), Euro 2024 from
+            <a href="https://www.uefa.com/uefaeuro/history/news/028e-1b22000e24bf-9d79cc6fc92b-1000--every-euro-2024-player-of-the-match/" target="_blank" rel="noopener noreferrer">UEFA.com</a>
+            (chosen by UEFA's technical observers).</p>
+          <p class="measure">No personal data: only professional match events and the players' names from match reports.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h2>How the project works, step by step</h2>
+        <ol class="techniques">
+          <li><strong>Collect.</strong> <code>data_prep.py</code> downloads the match list, the events and the line-ups of every match (about 650 MB of JSON) from StatsBomb's GitHub page.</li>
+          <li><strong>Clean.</strong> Only completed passes are kept: a pass that did not reach a team-mate links nobody. Penalty shoot-outs are dropped. Set pieces are marked, so they can be switched off. Each club gets one name for the season (StatsBomb's files mix "ATK Mohun Bagan" with "Mohun Bagan Super Giant", and "Hyderabad" with "SC Delhi").</li>
+          <li><strong>Build the network.</strong> One network per team per match. Players are the nodes. A pass from A to B is a directed link, weighted by how many passes went from A to B (A → B is not the same as B → A).</li>
+          <li><strong>Choose the time window.</strong> Either the starting XI until the team's first substitution (the usual choice for passing networks) or the whole match with every player who came on.</li>
+          <li><strong>Rank.</strong> PageRank is written by hand in <code>pagerank_engine.py</code> (power iteration) and checked against the networkx library on all 460 team networks. Passes made, passes received and betweenness are worked out too.</li>
+          <li><strong>Show.</strong> Passing networks on a pitch, rankings, a tournament leaderboard and charts on this website.</li>
+          <li><strong>Evaluate.</strong> <code>evaluate.py</code> compares PageRank with the official Player of the Match for all 115 World Cup 2022 and Euro 2024 matches.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="colophon glass">
+    <p>Data: StatsBomb Open Data (free event data from StatsBomb). Player of the Match: Goal.com (World Cup 2022) and
+    UEFA.com (Euro 2024). PageRank: Brin and Page (1998). For education only.</p>
+  </footer>
+</div>
+
+<script>window.APP = {{ {"tournaments": tournaments, "evalGroups": eval_groups}|tojson }};</script>
+<script src="{{ url_for('plotly_js') }}"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

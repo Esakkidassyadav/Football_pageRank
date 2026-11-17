@@ -1,0 +1,231 @@
+match_id,competition,date,kick_off,stage,stage_order,match_week,home_team,away_team,home_score,away_score,stadium,completed_passes
+3857286,FIFA World Cup 2022,2022-11-20,16:00,Group Stage,1,1,Qatar,Ecuador,0,2,Al Bayt Stadium,814
+3857271,FIFA World Cup 2022,2022-11-21,13:00,Group Stage,1,1,England,Iran,6,2,Sheikh Khalifa International Stadium,909
+3857285,FIFA World Cup 2022,2022-11-21,16:00,Group Stage,1,1,Senegal,Netherlands,0,2,Al Thumama Stadium,737
+3857282,FIFA World Cup 2022,2022-11-21,19:00,Group Stage,1,1,United States,Wales,1,1,Ahmad bin Ali Stadium,859
+3857300,FIFA World Cup 2022,2022-11-22,10:00,Group Stage,1,1,Argentina,Saudi Arabia,1,2,Lusail Stadium,739
+3857254,FIFA World Cup 2022,2022-11-22,13:00,Group Stage,1,1,Denmark,Tunisia,0,0,Education City Stadium ,859
+3857265,FIFA World Cup 2022,2022-11-22,16:00,Group Stage,1,1,Mexico,Poland,0,0,Stadium 974,696
+3857279,FIFA World Cup 2022,2022-11-22,19:00,Group Stage,1,1,France,Australia,4,1,Al Janoub Stadium   ,1074
+3857277,FIFA World Cup 2022,2022-11-23,10:00,Group Stage,1,1,Morocco,Croatia,0,0,Al Bayt Stadium,878
+3857284,FIFA World Cup 2022,2022-11-23,13:00,Group Stage,1,1,Germany,Japan,1,2,Sheikh Khalifa International Stadium,938
+3857291,FIFA World Cup 2022,2022-11-23,16:00,Group Stage,1,1,Spain,Costa Rica,7,0,Al Thumama Stadium,1181
+3857268,FIFA World Cup 2022,2022-11-23,19:00,Group Stage,1,1,Belgium,Canada,1,0,Ahmad bin Ali Stadium,852
+3857290,FIFA World Cup 2022,2022-11-24,10:00,Group Stage,1,1,Switzerland,Cameroon,1,0,Al Janoub Stadium   ,901
+3857287,FIFA World Cup 2022,2022-11-24,13:00,Group Stage,1,1,Uruguay,South Korea,0,0,Education City Stadium ,826
+3857298,FIFA World Cup 2022,2022-11-24,16:00,Group Stage,1,1,Portugal,Ghana,3,2,Stadium 974,912
+3857258,FIFA World Cup 2022,2022-11-24,19:00,Group Stage,1,1,Brazil,Serbia,2,0,Lusail Stadium,890
+3857273,FIFA World Cup 2022,2022-11-25,10:00,Group Stage,1,2,Wales,Iran,0,2,Ahmad bin Ali Stadium,665
+3857301,FIFA World Cup 2022,2022-11-25,13:00,Group Stage,1,2,Qatar,Senegal,1,3,Al Thumama Stadium,824
+3857274,FIFA World Cup 2022,2022-11-25,16:00,Group Stage,1,2,Netherlands,Ecuador,1,1,Sheikh Khalifa International Stadium,816
+3857272,FIFA World Cup 2022,2022-11-25,19:00,Group Stage,1,2,England,United States,0,0,Al Bayt Stadium,877
+3857288,FIFA World Cup 2022,2022-11-26,10:00,Group Stage,1,2,Tunisia,Australia,0,1,Al Janoub Stadium   ,680
+3857297,FIFA World Cup 2022,2022-11-26,13:00,Group Stage,1,2,Poland,Saudi Arabia,2,0,Education City Stadium ,748
+3857266,FIFA World Cup 2022,2022-11-26,16:00,Group Stage,1,2,France,Denmark,2,1,Stadium 974,943
+3857289,FIFA World Cup 2022,2022-11-26,19:00,Group Stage,1,2,Argentina,Mexico,2,0,Lusail Stadium,780
+3857295,FIFA World Cup 2022,2022-11-27,10:00,Group Stage,1,2,Japan,Costa Rica,0,1,Ahmad bin Ali Stadium,901
+3857283,FIFA World Cup 2022,2022-11-27,13:00,Group Stage,1,2,Belgium,Morocco,0,2,Al Thumama Stadium,891
+3857281,FIFA World Cup 2022,2022-11-27,16:00,Group Stage,1,2,Croatia,Canada,4,1,Sheikh Khalifa International Stadium,848
+3857263,FIFA World Cup 2022,2022-11-27,19:00,Group Stage,1,2,Spain,Germany,1,1,Al Bayt Stadium,869
+3857259,FIFA World Cup 2022,2022-11-28,10:00,Group Stage,1,2,Cameroon,Serbia,3,3,Al Janoub Stadium   ,704
+3857299,FIFA World Cup 2022,2022-11-28,13:00,Group Stage,1,2,South Korea,Ghana,2,3,Education City Stadium ,765
+3857269,FIFA World Cup 2022,2022-11-28,16:00,Group Stage,1,2,Brazil,Switzerland,1,0,Stadium 974,935
+3857270,FIFA World Cup 2022,2022-11-28,19:00,Group Stage,1,2,Portugal,Uruguay,2,0,Lusail Stadium,849
+3857294,FIFA World Cup 2022,2022-11-29,15:00,Group Stage,1,3,Netherlands,Qatar,2,0,Al Bayt Stadium,1143
+3857267,FIFA World Cup 2022,2022-11-29,15:00,Group Stage,1,3,Ecuador,Senegal,1,2,Sheikh Khalifa International Stadium,575
+3857278,FIFA World Cup 2022,2022-11-29,19:00,Group Stage,1,3,Iran,United States,0,1,Al Thumama Stadium,828
+3857261,FIFA World Cup 2022,2022-11-29,19:00,Group Stage,1,3,Wales,England,0,3,Ahmad bin Ali Stadium,827
+3857275,FIFA World Cup 2022,2022-11-30,15:00,Group Stage,1,3,Tunisia,France,1,0,Education City Stadium ,839
+3857257,FIFA World Cup 2022,2022-11-30,15:00,Group Stage,1,3,Australia,Denmark,1,0,Al Janoub Stadium   ,809
+3857260,FIFA World Cup 2022,2022-11-30,19:00,Group Stage,1,3,Saudi Arabia,Mexico,1,2,Lusail Stadium,561
+3857264,FIFA World Cup 2022,2022-11-30,19:00,Group Stage,1,3,Poland,Argentina,0,2,Stadium 974,1093
+3857276,FIFA World Cup 2022,2022-12-01,15:00,Group Stage,1,3,Canada,Morocco,1,2,Al Thumama Stadium,790
+3857296,FIFA World Cup 2022,2022-12-01,15:00,Group Stage,1,3,Croatia,Belgium,0,0,Ahmad bin Ali Stadium,1057
+3857255,FIFA World Cup 2022,2022-12-01,19:00,Group Stage,1,3,Japan,Spain,2,1,Sheikh Khalifa International Stadium,1170
+3857292,FIFA World Cup 2022,2022-12-01,19:00,Group Stage,1,3,Costa Rica,Germany,2,4,Al Bayt Stadium,953
+3857293,FIFA World Cup 2022,2022-12-02,15:00,Group Stage,1,3,Ghana,Uruguay,0,2,Al Janoub Stadium   ,748
+3857262,FIFA World Cup 2022,2022-12-02,15:00,Group Stage,1,3,South Korea,Portugal,2,1,Education City Stadium ,843
+3857256,FIFA World Cup 2022,2022-12-02,19:00,Group Stage,1,3,Serbia,Switzerland,2,3,Stadium 974,753
+3857280,FIFA World Cup 2022,2022-12-02,19:00,Group Stage,1,3,Cameroon,Brazil,1,0,Lusail Stadium,766
+3869117,FIFA World Cup 2022,2022-12-03,17:00,Round of 16,2,4,Netherlands,United States,3,1,Sheikh Khalifa International Stadium,831
+3869151,FIFA World Cup 2022,2022-12-03,21:00,Round of 16,2,4,Argentina,Australia,2,1,Ahmad bin Ali Stadium,1030
+3869152,FIFA World Cup 2022,2022-12-04,17:00,Round of 16,2,4,France,Poland,3,1,Al Thumama Stadium,911
+3869118,FIFA World Cup 2022,2022-12-04,21:00,Round of 16,2,4,England,Senegal,3,0,Al Bayt Stadium,859
+3869219,FIFA World Cup 2022,2022-12-05,17:00,Round of 16,2,4,Japan,Croatia,1,1,Al Janoub Stadium   ,1093
+3869253,FIFA World Cup 2022,2022-12-05,21:00,Round of 16,2,4,Brazil,South Korea,4,1,Stadium 974,1042
+3869220,FIFA World Cup 2022,2022-12-06,17:00,Round of 16,2,4,Morocco,Spain,0,0,Education City Stadium ,1210
+3869254,FIFA World Cup 2022,2022-12-06,21:00,Round of 16,2,4,Portugal,Switzerland,6,1,Lusail Stadium,842
+3869420,FIFA World Cup 2022,2022-12-09,17:00,Quarter-finals,3,5,Croatia,Brazil,1,1,Education City Stadium ,1291
+3869321,FIFA World Cup 2022,2022-12-09,19:00,Quarter-finals,3,5,Netherlands,Argentina,2,2,Lusail Stadium,1103
+3869486,FIFA World Cup 2022,2022-12-10,17:00,Quarter-finals,3,5,Morocco,Portugal,1,0,Al Thumama Stadium,800
+3869354,FIFA World Cup 2022,2022-12-10,21:00,Quarter-finals,3,5,England,France,1,2,Al Bayt Stadium,793
+3869519,FIFA World Cup 2022,2022-12-13,21:00,Semi-finals,4,6,Argentina,Croatia,3,0,Lusail Stadium,917
+3869552,FIFA World Cup 2022,2022-12-14,21:00,Semi-finals,4,6,France,Morocco,2,0,Al Bayt Stadium,845
+3869684,FIFA World Cup 2022,2022-12-17,17:00,3rd Place Final,5,7,Croatia,Morocco,2,1,Sheikh Khalifa International Stadium,870
+3869685,FIFA World Cup 2022,2022-12-18,17:00,Final,6,7,Argentina,France,3,3,Lusail Stadium,994
+3813314,Indian Super League 2021/22,2021-11-19,14:00,Regular Season,1,1,ATK Mohun Bagan,Kerala Blasters,4,2,Pandit Jawaharlal Nehru Stadium,590
+3813297,Indian Super League 2021/22,2021-11-20,16:00,Regular Season,1,1,Bengaluru,NorthEast United,4,2,GMC Athletic Stadium,615
+3813298,Indian Super League 2021/22,2021-11-21,16:00,Regular Season,1,1,East Bengal,Jamshedpur,1,1,Tilak Maidan Stadium,518
+3813270,Indian Super League 2021/22,2021-11-22,16:00,Regular Season,1,1,Mumbai City,Goa,3,0,Pandit Jawaharlal Nehru Stadium,642
+3813309,Indian Super League 2021/22,2021-11-23,16:00,Regular Season,1,1,Hyderabad,Chennaiyin,0,1,GMC Athletic Stadium,599
+3813289,Indian Super League 2021/22,2021-11-24,16:00,Regular Season,1,2,Odisha,Bengaluru,3,1,Tilak Maidan Stadium,622
+3813296,Indian Super League 2021/22,2021-11-25,16:00,Regular Season,1,2,NorthEast United,Kerala Blasters,0,0,Pandit Jawaharlal Nehru Stadium,543
+3813315,Indian Super League 2021/22,2021-11-26,16:00,Regular Season,1,2,Goa,Jamshedpur,1,3,GMC Athletic Stadium,571
+3813291,Indian Super League 2021/22,2021-11-27,16:00,Regular Season,1,2,East Bengal,ATK Mohun Bagan,0,3,Tilak Maidan Stadium,757
+3813277,Indian Super League 2021/22,2021-11-27,18:00,Regular Season,1,2,Mumbai City,Hyderabad,1,3,Pandit Jawaharlal Nehru Stadium,535
+3813292,Indian Super League 2021/22,2021-11-28,16:00,Regular Season,1,3,Bengaluru,Kerala Blasters,1,1,GMC Athletic Stadium,611
+3813294,Indian Super League 2021/22,2021-11-29,16:00,Regular Season,1,3,NorthEast United,Chennaiyin,1,2,Pandit Jawaharlal Nehru Stadium,683
+3813317,Indian Super League 2021/22,2021-11-30,16:00,Regular Season,1,3,Odisha,East Bengal,6,4,Tilak Maidan Stadium,662
+3813312,Indian Super League 2021/22,2021-12-01,14:00,Regular Season,1,3,ATK Mohun Bagan,Mumbai City,1,5,Pandit Jawaharlal Nehru Stadium,675
+3813288,Indian Super League 2021/22,2021-12-02,16:00,Regular Season,1,3,Jamshedpur,Hyderabad,1,1,GMC Athletic Stadium,394
+3813280,Indian Super League 2021/22,2021-12-03,16:00,Regular Season,1,4,Chennaiyin,East Bengal,0,0,Tilak Maidan Stadium,633
+3813316,Indian Super League 2021/22,2021-12-04,16:00,Regular Season,1,4,NorthEast United,Goa,2,1,Pandit Jawaharlal Nehru Stadium,640
+3813274,Indian Super League 2021/22,2021-12-04,18:00,Regular Season,1,4,Bengaluru,Mumbai City,1,3,GMC Athletic Stadium,430
+3813300,Indian Super League 2021/22,2021-12-05,16:00,Regular Season,1,4,Kerala Blasters,Odisha,2,1,Tilak Maidan Stadium,620
+3813268,Indian Super League 2021/22,2021-12-06,16:00,Regular Season,1,4,Jamshedpur,ATK Mohun Bagan,2,1,GMC Athletic Stadium,499
+3813267,Indian Super League 2021/22,2021-12-07,16:00,Regular Season,1,5,East Bengal,Goa,3,4,Tilak Maidan Stadium,668
+3813299,Indian Super League 2021/22,2021-12-08,16:00,Regular Season,1,5,Hyderabad,Bengaluru,1,0,GMC Athletic Stadium,493
+3813284,Indian Super League 2021/22,2021-12-09,16:00,Regular Season,1,5,Mumbai City,Jamshedpur,4,2,Pandit Jawaharlal Nehru Stadium,593
+3813301,Indian Super League 2021/22,2021-12-10,16:00,Regular Season,1,5,Odisha,NorthEast United,1,0,Tilak Maidan Stadium,598
+3813281,Indian Super League 2021/22,2021-12-11,14:00,Regular Season,1,5,ATK Mohun Bagan,Chennaiyin,1,1,Pandit Jawaharlal Nehru Stadium,631
+3813285,Indian Super League 2021/22,2021-12-11,18:00,Regular Season,1,6,Goa,Bengaluru,2,1,GMC Athletic Stadium,434
+3813310,Indian Super League 2021/22,2021-12-12,16:00,Regular Season,1,6,East Bengal,Kerala Blasters,1,1,Tilak Maidan Stadium,588
+3813290,Indian Super League 2021/22,2021-12-13,16:00,Regular Season,1,6,Hyderabad,NorthEast United,5,1,GMC Athletic Stadium,565
+3813269,Indian Super League 2021/22,2021-12-14,16:00,Regular Season,1,6,Odisha,Jamshedpur,0,4,Tilak Maidan Stadium,574
+3813286,Indian Super League 2021/22,2021-12-15,16:00,Regular Season,1,6,Mumbai City,Chennaiyin,1,0,Pandit Jawaharlal Nehru Stadium,735
+3813287,Indian Super League 2021/22,2021-12-16,16:00,Regular Season,1,7,Bengaluru,ATK Mohun Bagan,3,3,GMC Athletic Stadium,355
+3813276,Indian Super League 2021/22,2021-12-17,16:00,Regular Season,1,7,NorthEast United,East Bengal,2,0,Pandit Jawaharlal Nehru Stadium,592
+3813279,Indian Super League 2021/22,2021-12-18,16:00,Regular Season,1,7,Chennaiyin,Odisha,2,1,Tilak Maidan Stadium,691
+3813272,Indian Super League 2021/22,2021-12-18,18:00,Regular Season,1,7,Goa,Hyderabad,1,1,GMC Athletic Stadium,565
+3813282,Indian Super League 2021/22,2021-12-19,16:00,Regular Season,1,7,Mumbai City,Kerala Blasters,0,3,Pandit Jawaharlal Nehru Stadium,560
+3813307,Indian Super League 2021/22,2021-12-20,16:00,Regular Season,1,8,Jamshedpur,Bengaluru,0,0,GMC Athletic Stadium,441
+3813306,Indian Super League 2021/22,2021-12-21,16:00,Regular Season,1,8,NorthEast United,ATK Mohun Bagan,2,3,Pandit Jawaharlal Nehru Stadium,642
+3813278,Indian Super League 2021/22,2021-12-22,16:00,Regular Season,1,8,Chennaiyin,Kerala Blasters,0,3,Tilak Maidan Stadium,656
+3813304,Indian Super League 2021/22,2021-12-23,16:00,Regular Season,1,8,Hyderabad,East Bengal,1,1,GMC Athletic Stadium,555
+3813308,Indian Super League 2021/22,2021-12-24,16:00,Regular Season,1,8,Odisha,Goa,1,1,Tilak Maidan Stadium,715
+3813275,Indian Super League 2021/22,2021-12-26,16:00,Regular Season,1,9,Kerala Blasters,Jamshedpur,1,1,Tilak Maidan Stadium,496
+3813318,Indian Super League 2021/22,2021-12-27,16:00,Regular Season,1,9,NorthEast United,Mumbai City,3,3,Pandit Jawaharlal Nehru Stadium,602
+3813295,Indian Super League 2021/22,2021-12-28,16:00,Regular Season,1,9,Hyderabad,Odisha,6,1,GMC Athletic Stadium,627
+3813303,Indian Super League 2021/22,2021-12-29,14:00,Regular Season,1,9,ATK Mohun Bagan,Goa,2,1,Pandit Jawaharlal Nehru Stadium,773
+3813283,Indian Super League 2021/22,2021-12-30,16:00,Regular Season,1,9,Chennaiyin,Bengaluru,2,4,Tilak Maidan Stadium,628
+3813271,Indian Super League 2021/22,2022-01-02,16:00,Regular Season,1,10,Kerala Blasters,Goa,2,2,Tilak Maidan Stadium,607
+3813311,Indian Super League 2021/22,2022-01-02,18:00,Regular Season,1,10,Jamshedpur,Chennaiyin,0,1,GMC Athletic Stadium,587
+3813273,Indian Super League 2021/22,2022-01-03,16:00,Regular Season,1,10,Odisha,Mumbai City,4,2,Tilak Maidan Stadium,660
+3813293,Indian Super League 2021/22,2022-01-04,16:00,Regular Season,1,10,Bengaluru,East Bengal,1,1,GMC Athletic Stadium,625
+3813264,Indian Super League 2021/22,2022-01-05,14:00,Regular Season,1,10,ATK Mohun Bagan,Hyderabad,2,2,Pandit Jawaharlal Nehru Stadium,658
+3813302,Indian Super League 2021/22,2022-01-06,16:00,Regular Season,1,11,Jamshedpur,NorthEast United,3,2,GMC Athletic Stadium,648
+3813265,Indian Super League 2021/22,2022-01-07,16:00,Regular Season,1,11,East Bengal,Mumbai City,0,0,Tilak Maidan Stadium,554
+3813266,Indian Super League 2021/22,2022-01-08,18:00,Regular Season,1,11,Goa,Chennaiyin,1,0,GMC Athletic Stadium,630
+3813305,Indian Super League 2021/22,2022-01-09,16:00,Regular Season,1,11,Kerala Blasters,Hyderabad,1,0,Tilak Maidan Stadium,493
+3817849,Indian Super League 2021/22,2022-01-10,16:00,Regular Season,1,12,Mumbai City,Bengaluru,0,3,Pandit Jawaharlal Nehru Stadium,621
+3817850,Indian Super League 2021/22,2022-01-11,16:00,Regular Season,1,12,Jamshedpur,East Bengal,1,0,GMC Athletic Stadium,427
+3817851,Indian Super League 2021/22,2022-01-12,16:00,Regular Season,1,12,Odisha,Kerala Blasters,0,2,Tilak Maidan Stadium,715
+3817879,Indian Super League 2021/22,2022-01-13,16:00,Regular Season,1,12,Chennaiyin,Hyderabad,1,1,Pandit Jawaharlal Nehru Stadium,602
+3817890,Indian Super League 2021/22,2022-01-14,16:00,Regular Season,1,12,Goa,NorthEast United,1,1,GMC Athletic Stadium,565
+3817865,Indian Super League 2021/22,2022-01-18,16:00,Regular Season,1,13,NorthEast United,Odisha,0,2,Pandit Jawaharlal Nehru Stadium,665
+3817853,Indian Super League 2021/22,2022-01-19,16:00,Regular Season,1,13,Goa,East Bengal,1,2,GMC Athletic Stadium,675
+3817876,Indian Super League 2021/22,2022-01-22,16:00,Regular Season,1,14,Chennaiyin,NorthEast United,2,1,Pandit Jawaharlal Nehru Stadium,653
+3813313,Indian Super League 2021/22,2022-01-23,16:00,Regular Season,1,11,ATK Mohun Bagan,Odisha,0,0,Pandit Jawaharlal Nehru Stadium,732
+3817874,Indian Super League 2021/22,2022-01-23,16:00,Regular Season,1,14,Bengaluru,Goa,1,1,GMC Athletic Stadium,460
+3817878,Indian Super League 2021/22,2022-01-24,16:00,Regular Season,1,14,East Bengal,Hyderabad,0,4,Tilak Maidan Stadium,620
+3817867,Indian Super League 2021/22,2022-01-25,16:00,Regular Season,1,15,Mumbai City,NorthEast United,1,1,Pandit Jawaharlal Nehru Stadium,611
+3817868,Indian Super League 2021/22,2022-01-26,16:00,Regular Season,1,15,Bengaluru,Chennaiyin,3,0,GMC Athletic Stadium,737
+3817860,Indian Super League 2021/22,2022-01-27,16:00,Regular Season,1,15,Odisha,Hyderabad,2,3,Tilak Maidan Stadium,609
+3817875,Indian Super League 2021/22,2022-01-28,16:00,Regular Season,1,15,Jamshedpur,Goa,1,0,GMC Athletic Stadium,594
+3817888,Indian Super League 2021/22,2022-01-29,14:00,Regular Season,1,15,ATK Mohun Bagan,East Bengal,3,1,Pandit Jawaharlal Nehru Stadium,685
+3817861,Indian Super League 2021/22,2022-01-30,16:00,Regular Season,1,16,Kerala Blasters,Bengaluru,0,1,Tilak Maidan Stadium,450
+3817871,Indian Super League 2021/22,2022-01-31,16:00,Regular Season,1,16,NorthEast United,Hyderabad,0,5,Pandit Jawaharlal Nehru Stadium,576
+3817894,Indian Super League 2021/22,2022-02-01,16:00,Regular Season,1,16,Goa,Odisha,1,1,GMC Athletic Stadium,606
+3817882,Indian Super League 2021/22,2022-02-02,16:00,Regular Season,1,16,East Bengal,Chennaiyin,2,2,Tilak Maidan Stadium,740
+3817864,Indian Super League 2021/22,2022-02-03,16:00,Regular Season,1,16,Mumbai City,ATK Mohun Bagan,1,1,Pandit Jawaharlal Nehru Stadium,650
+3817886,Indian Super League 2021/22,2022-02-04,16:00,Regular Season,1,17,Kerala Blasters,NorthEast United,2,1,Tilak Maidan Stadium,571
+3817883,Indian Super League 2021/22,2022-02-05,16:00,Regular Season,1,17,Bengaluru,Jamshedpur,3,1,GMC Athletic Stadium,518
+3817852,Indian Super League 2021/22,2022-02-06,16:00,Regular Season,1,17,Chennaiyin,Mumbai City,0,1,Pandit Jawaharlal Nehru Stadium,589
+3817896,Indian Super League 2021/22,2022-02-07,16:00,Regular Season,1,17,East Bengal,Odisha,1,2,Tilak Maidan Stadium,749
+3817884,Indian Super League 2021/22,2022-02-08,16:00,Regular Season,1,17,Hyderabad,ATK Mohun Bagan,1,2,GMC Athletic Stadium,620
+3817895,Indian Super League 2021/22,2022-02-09,16:00,Regular Season,1,18,Chennaiyin,Goa,0,5,Tilak Maidan Stadium,901
+3817881,Indian Super League 2021/22,2022-02-10,16:00,Regular Season,1,18,Jamshedpur,Kerala Blasters,3,0,GMC Athletic Stadium,432
+3817869,Indian Super League 2021/22,2022-02-11,16:00,Regular Season,1,22,Bengaluru,Hyderabad,1,2,GMC Athletic Stadium,578
+3817873,Indian Super League 2021/22,2022-02-12,14:00,Regular Season,1,22,ATK Mohun Bagan,NorthEast United,3,1,Pandit Jawaharlal Nehru Stadium,720
+3817862,Indian Super League 2021/22,2022-02-13,16:00,Regular Season,1,22,Mumbai City,Odisha,4,1,Pandit Jawaharlal Nehru Stadium,735
+3817902,Indian Super League 2021/22,2022-02-14,16:00,Regular Season,1,21,Kerala Blasters,East Bengal,1,0,Tilak Maidan Stadium,612
+3817848,Indian Super League 2021/22,2022-02-15,16:00,Regular Season,1,21,Goa,ATK Mohun Bagan,0,2,GMC Athletic Stadium,684
+3817880,Indian Super League 2021/22,2022-02-16,16:00,Regular Season,1,21,Odisha,Chennaiyin,2,2,Tilak Maidan Stadium,649
+3817901,Indian Super League 2021/22,2022-02-17,16:00,Regular Season,1,14,Jamshedpur,Mumbai City,3,2,GMC Athletic Stadium,608
+3817877,Indian Super League 2021/22,2022-02-18,16:00,Regular Season,1,18,NorthEast United,Bengaluru,2,1,Pandit Jawaharlal Nehru Stadium,656
+3817855,Indian Super League 2021/22,2022-02-19,16:00,Regular Season,1,14,Kerala Blasters,ATK Mohun Bagan,2,2,Tilak Maidan Stadium,606
+3817863,Indian Super League 2021/22,2022-02-19,18:00,Regular Season,1,19,Hyderabad,Goa,3,2,GMC Athletic Stadium,606
+3817900,Indian Super League 2021/22,2022-02-20,16:00,Regular Season,1,22,Chennaiyin,Jamshedpur,1,4,Tilak Maidan Stadium,641
+3817872,Indian Super League 2021/22,2022-02-21,16:00,Regular Season,1,19,Bengaluru,Odisha,2,1,GMC Athletic Stadium,592
+3817885,Indian Super League 2021/22,2022-02-22,16:00,Regular Season,1,18,Mumbai City,East Bengal,1,0,Pandit Jawaharlal Nehru Stadium,629
+3817897,Indian Super League 2021/22,2022-02-23,16:00,Regular Season,1,20,Hyderabad,Kerala Blasters,2,1,GMC Athletic Stadium,579
+3817892,Indian Super League 2021/22,2022-02-24,16:00,Regular Season,1,18,Odisha,ATK Mohun Bagan,1,1,Tilak Maidan Stadium,681
+3817859,Indian Super League 2021/22,2022-02-25,16:00,Regular Season,1,21,NorthEast United,Jamshedpur,2,3,Pandit Jawaharlal Nehru Stadium,542
+3817858,Indian Super League 2021/22,2022-02-26,16:00,Regular Season,1,19,Kerala Blasters,Chennaiyin,3,0,Tilak Maidan Stadium,741
+3817898,Indian Super League 2021/22,2022-02-26,18:00,Regular Season,1,20,Goa,Mumbai City,0,2,GMC Athletic Stadium,589
+3817854,Indian Super League 2021/22,2022-02-27,14:00,Regular Season,1,13,ATK Mohun Bagan,Bengaluru,2,0,Pandit Jawaharlal Nehru Stadium,658
+3817893,Indian Super League 2021/22,2022-02-28,16:00,Regular Season,1,19,East Bengal,NorthEast United,1,1,Tilak Maidan Stadium,644
+3817857,Indian Super League 2021/22,2022-03-01,16:00,Regular Season,1,13,Hyderabad,Jamshedpur,0,3,GMC Athletic Stadium,486
+3817866,Indian Super League 2021/22,2022-03-02,16:00,Regular Season,1,13,Kerala Blasters,Mumbai City,3,1,Tilak Maidan Stadium,513
+3817889,Indian Super League 2021/22,2022-03-03,16:00,Regular Season,1,20,Chennaiyin,ATK Mohun Bagan,0,1,Pandit Jawaharlal Nehru Stadium,925
+3817899,Indian Super League 2021/22,2022-03-04,16:00,Regular Season,1,20,Jamshedpur,Odisha,5,1,GMC Athletic Stadium,507
+3817891,Indian Super League 2021/22,2022-03-05,16:00,Regular Season,1,20,East Bengal,Bengaluru,0,1,Tilak Maidan Stadium,650
+3817887,Indian Super League 2021/22,2022-03-05,18:00,Regular Season,1,21,Hyderabad,Mumbai City,2,1,Pandit Jawaharlal Nehru Stadium,669
+3817870,Indian Super League 2021/22,2022-03-06,16:00,Regular Season,1,22,Goa,Kerala Blasters,4,4,GMC Athletic Stadium,646
+3817856,Indian Super League 2021/22,2022-03-07,14:00,Regular Season,1,19,ATK Mohun Bagan,Jamshedpur,0,1,Pandit Jawaharlal Nehru Stadium,550
+3827337,Indian Super League 2021/22,2022-03-11,16:00,Play-offs - Semi-Finals,1,23,Jamshedpur,Kerala Blasters,0,1,Pandit Jawaharlal Nehru Stadium,438
+3827338,Indian Super League 2021/22,2022-03-12,16:00,Play-offs - Semi-Finals,1,23,Hyderabad,ATK Mohun Bagan,3,1,GMC Athletic Stadium,759
+3827335,Indian Super League 2021/22,2022-03-15,16:00,Play-offs - Semi-Finals,1,24,Kerala Blasters,Jamshedpur,1,1,Tilak Maidan Stadium,460
+3827336,Indian Super League 2021/22,2022-03-16,14:00,Play-offs - Semi-Finals,1,24,ATK Mohun Bagan,Hyderabad,1,0,GMC Athletic Stadium,525
+3827767,Indian Super League 2021/22,2022-03-20,16:00,Championship - Final,1,25,Hyderabad,Kerala Blasters,1,1,Pandit Jawaharlal Nehru Stadium,830
+3930158,UEFA Euro 2024,2024-06-14,19:00,Group Stage,1,1,Germany,Scotland,5,1,Allianz Arena,871
+3930159,UEFA Euro 2024,2024-06-15,13:00,Group Stage,1,1,Hungary,Switzerland,1,3,RheinEnergieStadion,791
+3930160,UEFA Euro 2024,2024-06-15,16:00,Group Stage,1,1,Spain,Croatia,3,0,Olympiastadion Berlin,892
+3930161,UEFA Euro 2024,2024-06-15,19:00,Group Stage,1,1,Italy,Albania,2,1,Signal-Iduna-Park,1124
+3938637,UEFA Euro 2024,2024-06-16,13:00,Group Stage,1,1,Poland,Netherlands,1,2,Volksparkstadion,805
+3930162,UEFA Euro 2024,2024-06-16,16:00,Group Stage,1,1,Slovenia,Denmark,1,1,MHPArena,867
+3930163,UEFA Euro 2024,2024-06-16,19:00,Group Stage,1,1,Serbia,England,0,1,VELTINS-Arena,1005
+3938638,UEFA Euro 2024,2024-06-17,13:00,Group Stage,1,1,Romania,Ukraine,3,0,Allianz Arena,735
+3930164,UEFA Euro 2024,2024-06-17,16:00,Group Stage,1,1,Belgium,Slovakia,0,1,Deutsche Bank Park,817
+3930165,UEFA Euro 2024,2024-06-17,19:00,Group Stage,1,1,Austria,France,0,1,Merkur Spiel-Arena,853
+3938639,UEFA Euro 2024,2024-06-18,16:00,Group Stage,1,1,Turkey,Georgia,3,1,Signal-Iduna-Park,952
+3930166,UEFA Euro 2024,2024-06-18,19:00,Group Stage,1,1,Portugal,Czech Republic,2,1,Red Bull Arena,820
+3930167,UEFA Euro 2024,2024-06-19,13:00,Group Stage,1,2,Croatia,Albania,2,2,Volksparkstadion,866
+3930168,UEFA Euro 2024,2024-06-19,16:00,Group Stage,1,2,Germany,Hungary,2,0,MHPArena,953
+3930169,UEFA Euro 2024,2024-06-19,19:00,Group Stage,1,2,Scotland,Switzerland,1,1,RheinEnergieStadion,684
+3930170,UEFA Euro 2024,2024-06-20,13:00,Group Stage,1,2,Slovenia,Serbia,1,1,Allianz Arena,806
+3930171,UEFA Euro 2024,2024-06-20,16:00,Group Stage,1,2,Denmark,England,1,1,Deutsche Bank Park,984
+3930172,UEFA Euro 2024,2024-06-20,19:00,Group Stage,1,2,Spain,Italy,1,0,VELTINS-Arena,953
+3938640,UEFA Euro 2024,2024-06-21,13:00,Group Stage,1,2,Slovakia,Ukraine,1,2,Merkur Spiel-Arena,908
+3938641,UEFA Euro 2024,2024-06-21,16:00,Group Stage,1,2,Poland,Austria,1,3,Olympiastadion Berlin,748
+3930173,UEFA Euro 2024,2024-06-21,19:00,Group Stage,1,2,Netherlands,France,0,0,Trainingszentrum RB Leipzig Platz 1,997
+3938642,UEFA Euro 2024,2024-06-22,13:00,Group Stage,1,2,Georgia,Czech Republic,1,1,Volksparkstadion,732
+3930174,UEFA Euro 2024,2024-06-22,16:00,Group Stage,1,2,Turkey,Portugal,0,3,Signal-Iduna-Park,928
+3930175,UEFA Euro 2024,2024-06-22,19:00,Group Stage,1,2,Belgium,Romania,2,0,RheinEnergieStadion,710
+3930176,UEFA Euro 2024,2024-06-23,19:00,Group Stage,1,3,Switzerland,Germany,1,1,Deutsche Bank Park,887
+3930177,UEFA Euro 2024,2024-06-23,19:00,Group Stage,1,3,Scotland,Hungary,0,1,MHPArena,725
+3930178,UEFA Euro 2024,2024-06-24,19:00,Group Stage,1,3,Croatia,Italy,1,1,Red Bull Arena,988
+3930179,UEFA Euro 2024,2024-06-24,19:00,Group Stage,1,3,Albania,Spain,0,1,Merkur Spiel-Arena,900
+3938643,UEFA Euro 2024,2024-06-25,16:00,Group Stage,1,3,France,Poland,1,1,Signal-Iduna-Park,883
+3930180,UEFA Euro 2024,2024-06-25,16:00,Group Stage,1,3,Netherlands,Austria,2,3,Olympiastadion Berlin,732
+3930181,UEFA Euro 2024,2024-06-25,19:00,Group Stage,1,3,England,Slovenia,0,0,RheinEnergieStadion,929
+3930182,UEFA Euro 2024,2024-06-25,19:00,Group Stage,1,3,Denmark,Serbia,0,0,Allianz Arena,930
+3938645,UEFA Euro 2024,2024-06-26,16:00,Group Stage,1,3,Ukraine,Belgium,0,0,MHPArena,854
+3930183,UEFA Euro 2024,2024-06-26,16:00,Group Stage,1,3,Slovakia,Romania,1,1,Deutsche Bank Park,641
+3938644,UEFA Euro 2024,2024-06-26,19:00,Group Stage,1,3,Georgia,Portugal,2,0,VELTINS-Arena,885
+3930184,UEFA Euro 2024,2024-06-26,22:00,Group Stage,1,3,Czech Republic,Turkey,1,2,Volksparkstadion,653
+3940878,UEFA Euro 2024,2024-06-29,16:00,Round of 16,2,4,Switzerland,Italy,2,0,Olympiastadion Berlin,976
+3940983,UEFA Euro 2024,2024-06-29,19:00,Round of 16,2,4,Germany,Denmark,2,0,Signal-Iduna-Park,891
+3941017,UEFA Euro 2024,2024-06-30,16:00,Round of 16,2,4,England,Slovakia,2,1,VELTINS-Arena,1137
+3941018,UEFA Euro 2024,2024-06-30,19:00,Round of 16,2,4,Spain,Georgia,4,1,RheinEnergieStadion,1007
+3941019,UEFA Euro 2024,2024-07-01,16:00,Round of 16,2,4,France,Belgium,1,0,Merkur Spiel-Arena,1046
+3941020,UEFA Euro 2024,2024-07-01,19:00,Round of 16,2,4,Portugal,Slovenia,0,0,Deutsche Bank Park,934
+3941021,UEFA Euro 2024,2024-07-02,16:00,Round of 16,2,4,Romania,Netherlands,0,3,Allianz Arena,699
+3941022,UEFA Euro 2024,2024-07-02,19:00,Round of 16,2,4,Austria,Turkey,1,2,Red Bull Arena,840
+3942226,UEFA Euro 2024,2024-07-05,16:00,Quarter-finals,3,5,Spain,Germany,2,1,MHPArena,1055
+3942349,UEFA Euro 2024,2024-07-05,19:00,Quarter-finals,3,5,Portugal,France,0,0,Volksparkstadion,1400
+3942227,UEFA Euro 2024,2024-07-06,16:00,Quarter-finals,3,5,England,Switzerland,1,1,Merkur Spiel-Arena,1249
+3942382,UEFA Euro 2024,2024-07-06,19:00,Quarter-finals,3,5,Netherlands,Turkey,2,1,Olympiastadion Berlin,814
+3942752,UEFA Euro 2024,2024-07-09,19:00,Semi-finals,4,6,Spain,France,2,1,Allianz Arena,791
+3942819,UEFA Euro 2024,2024-07-10,19:00,Semi-finals,4,6,Netherlands,England,1,2,Signal-Iduna-Park,955
+3943043,UEFA Euro 2024,2024-07-14,19:00,Final,6,7,Spain,England,2,1,Olympiastadion Berlin,772
